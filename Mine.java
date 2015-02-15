@@ -19,14 +19,14 @@ public class Mine extends Task<ClientContext>
 	public boolean activate()
 	{
 		return ctx.inventory.select().count() < 28 
-		&& !ctx.objects.select().id(tinDepositId).isEmpty() 
+		&& !ctx.objects.select().id(copperDepositId).isEmpty() 
 		&& ctx.players.local().animation() == -1
 		&& !ctx.players.local().inMotion();
 	}
 	
 	public void execute()
 	{
-		GameObject IronDeposit = ctx.objects.nearest().id(tinDepositId).poll();
+		GameObject IronDeposit = ctx.objects.nearest().id(copperDepositId).poll();
 		if(IronDeposit.inViewport())
 		{
 			IronDeposit.interact("Mine");

@@ -17,7 +17,7 @@ public class Run extends PollingScript<ClientContext>
 	@Override
 	public void start()
 	{
-		taskList.addAll(Arrays.asList(new WalkToMine(ctx), new Mine(ctx), new WalkToBank(ctx), new BankOres(ctx)));
+		taskList.addAll(Arrays.asList(new WalkToMine(ctx), new Mine(ctx), new WalkToBank(ctx), new BankOres(ctx), new RunFromRat(ctx)));
 	}
 	
 	@Override
