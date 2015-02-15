@@ -28,7 +28,6 @@ public class WalkToMine extends Task<ClientContext>
 	{
 		return 	ctx.inventory.count() <= 1
 				&& ctx.players.local().animation() == -1
-				&& ctx.objects.select().id(ironDepositId).within(5).isEmpty()
 				&& ctx.objects.select().id(usedIronDepositId).within(5).isEmpty();
 	}
 	
