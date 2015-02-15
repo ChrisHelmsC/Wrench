@@ -6,7 +6,7 @@ import org.powerbot.script.rt4.GameObject;
 
 public class Mine extends Task<ClientContext>
 {
-	public final int[] ironDepositId = {13446, 13444, 13445};
+	public final int[] ironDepositId = {13446, 13444, 13445};		//Set deposit IDs
 	public final int[] copperDepositId = {13450, 13451, 13452,};
 	public final int[] tinDepositId = {13447, 13449, 13448};
 	
@@ -16,7 +16,10 @@ public class Mine extends Task<ClientContext>
 	}
 	
 	@Override
-	public boolean activate()
+	//Activates if inventory is not full, there is a deposit nearby, 
+	//the player is not currently animated(mining), and the player is not
+	//currently in motion.
+	public boolean activate()						
 	{
 		return ctx.inventory.select().count() < 28 
 		&& !ctx.objects.select().id(copperDepositId).isEmpty() 
@@ -26,20 +29,20 @@ public class Mine extends Task<ClientContext>
 	
 	public void execute()
 	{
-		GameObject IronDeposit = ctx.objects.nearest().id(copperDepositId).poll();
-		if(IronDeposit.inViewport())
+		GameObject IronDeposit = ctx.objects.nearest().id(copperDepositId).poll();	//create a game object for the deposit
+		if(IronDeposit.inViewport())												//Check if deposit is in viewport
 		{
-			IronDeposit.interact("Mine");
+			IronDeposit.interact("Mine");											//Mine game object
 			try
 			{
-				Thread.sleep(1000);
+				Thread.sleep(1000);													//Sleep
 			}
 			catch(InterruptedException ex)
 			{
 				Thread.currentThread().interrupt();
 			}
 		}
-		else
+		else																		//If object is not in view, walk and turn camera towards it
 		{
 			ctx.movement.step(IronDeposit);
 			ctx.camera.turnTo(IronDeposit);
